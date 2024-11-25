@@ -20,6 +20,9 @@ let nextIntervalID = 0;
  * // 8000: FIRED
  * // etc...
  * ```
+ * The first time the interval fires, the delay can vary wildly.
+ * If you set it at timestamp `###999`, it will want to fire after `1` millisecond.
+ * If you set it at timestamp `###001`, it will want to fire after `999` milliseconds.
  * @param callback A callback that is fired on the interval.
  * @param interval The interval to fire the callback at.
  * @returns An ID that tracks this interval.
