@@ -1,0 +1,36 @@
+{
+	"name": "accurate-intervals",
+	"version": "1.0.0",
+	"type": "module",
+	"main": "./build/interval.cjs",
+	"module": "./build/interval.mjs",
+	"types": "./build/interval.d.ts",
+	"exports": {
+		"types": "./build/interval.d.ts",
+		"import": "./build/interval.mjs",
+		"require": "./build/interval.cjs"
+	},
+	"devDependencies": {
+		"@types/chai": "^5.0.1",
+		"@types/mocha": "^10.0.10",
+		"@types/node": "^22.9.1",
+		"c8": "^10.1.2",
+		"chai": "^5.1.2",
+		"esbuild": "^0.24.0",
+		"mocha": "^10.8.2",
+		"standard-version": "^9.5.0",
+		"typedoc": "^0.26.11"
+	},
+	"scripts": {
+		"build": "tsc && npm run build:mjs && npm run build:cjs",
+		"build:mjs": "esbuild build/interval.js --bundle --platform=node --target=es6 --format=esm --outfile=build/interval.mjs",
+		"build:cjs": "esbuild build/interval.js --bundle --platform=node --target=node18 --format=cjs --outfile=build/interval.cjs",
+		"docs": "npx typedoc",
+		"test": "npx mocha build/*.spec.js",
+		"deploy": "npm run build && npm run test && npm run docs",
+		"release": "npm run deploy && npx standard-version"
+	},
+	"author": "jackindisguise",
+	"license": "ISC",
+	"description": "Creating and rolling results from a probability table."
+}
