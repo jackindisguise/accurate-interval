@@ -7,31 +7,36 @@
 </div>
 
 # Accurate Intervals
-Provides functions for setting intervals that try to correct themselves to align with the target times.
+Provides functions for setting intervals that try to correct themselves to align with the targetted intervals.
+
+# Install
+`npm i jackindisguise/accurate-intervals`
 
 # Example
 ## Absolute Intervals
 Absolute intervals are intervals that try to fire with respect to timestamp 0.
 
-```javascript
+```TypeScript
+import {setAbsoluteInterval} from "accurate-intervals";
 setAbsoluteInterval((delay)=>{
 	console.log(`(${Date.now()}: Fired after ${delay} milliseconds.`);
-}, 1000)
+}, 1000);
 ```
 
 If `Date.now()` returns `123###`, setting an absolute interval that fires every `1000` milliseconds should be expected to fire at `124000`, `125000`, `126000`, `127000`, etc...
 
 The first time the interval fires, the delay can vary wildly.
 * If you set it at timestamp `###999`, it will want to fire after `1` millisecond.
-* If you set it at timestamp `###001`, it will want to fire after `998` milliseconds.
+* If you set it at timestamp `###001`, it will want to fire after `999` milliseconds.
 
 ## Relative Intervals
 Relative intervals are intervals that try to fire with respect to when they were called.
 
 ```javascript
+import {setRelativeInterval} from "accurate-intervals";
 setRelativeInterval((delay)=>{
 	console.log(`(${Date.now()}: Fired after ${delay} milliseconds.`);
-}, 1000)
+}, 1000);
 ```
 
 If `Date.now()` returns `123###`, setting a relative interval that fires every `1000` milliseconds should be expected to fire at `124###`, `125###`, `126###`, `127###`, etc...
@@ -44,10 +49,29 @@ Setting an interval below `30ms` is inadvisable in pretty much all circumstances
 In order to avoid this scenario, these interval functions automatically skip cycles that are trying to catch up.
 
 ### Canceling intervals.
-```javascript
+```TypeScript
+import {setRelativeInterval, clearCustomInterval} from "accurate-intervals";
 const intervalID = setRelativeInterval((delay)=>{
 	clearCustomInterval(intervalID);
 	console.log("only fires once");
 }, 1000);
 ```
+
 `clearCustomInterval` clears intervals set by both `setRelativeInterval` and `setAbsoluteInterval`.
+
+# Supports CJS and ESM
+## CJS
+```JavaScript
+const {setAbsoluteInterval} = require("accurate-intervals");
+setAbsoluteInterval((delay)=>{
+	console.log(`(${Date.now()}: Fired after ${delay} milliseconds.`);
+}, 1000);
+```
+
+## ESM
+```JavaScript
+import {setAbsoluteInterval} from "accurate-intervals";
+setAbsoluteInterval((delay)=>{
+	console.log(`(${Date.now()}: Fired after ${delay} milliseconds.`);
+}, 1000);
+```
