@@ -1,8 +1,9 @@
 <div align='center'>
-	
+
+![GitHub package.json version](https://img.shields.io/github/package-json/v/jackindisguise/accurate-intervals?style=for-the-badge&logo=npm)
+
 [![Static Badge](https://img.shields.io/badge/GitHub-black?style=for-the-badge&logo=github)](https://github.com/jackindisguise/accurate-intervals)
 [![Static Badge](https://img.shields.io/badge/Documentation-orange?style=for-the-badge&logo=github)](https://jackindisguise.github.io/accurate-intervals/)
-![GitHub package.json version](https://img.shields.io/github/package-json/v/jackindisguise/accurate-intervals?style=for-the-badge&logo=npm)
 
 </div>
 
